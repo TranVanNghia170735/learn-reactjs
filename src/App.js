@@ -1,7 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
 function App() {
+  const name = 'Nghia';
+  const age = 18;
+  const isMale = true;
+  const student = {
+    name: 'Easy Frontend'
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,14 +17,41 @@ function App() {
         <p>
           Tran Van Nghia
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>Xin chao {name} - {age} - {isMale ? 'Male' : 'Female'}</p>
+        {isMale ? <p>Male</p> : <p>Female</p>}
+        {isMale && <p> Male </p>}
+        {!isMale && <p> Female </p>}
+
+        {isMale && (
+          <div>
+            <p> Male1</p>
+            <p> Male1</p>
+            <p> Male1</p>
+          </div>
+        )}
+
+        {isMale && (
+          <React.Fragment>
+            <p> Male 1</p>
+            <p> Male 2</p>
+            <p> Male 3</p>
+          </React.Fragment>
+
+
+        )}
+
+        {isMale && (
+          <>
+            <p> Male 1</p>
+            <p> Male 2</p>
+            <p> Male 3</p>
+          </>
+
+
+        )}
+
+        <p>{student.name}</p>
+
       </header>
     </div>
   );
