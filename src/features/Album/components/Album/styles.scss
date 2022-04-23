@@ -1,8 +1,16 @@
 .album {
+    &--active {
+        background-color: goldenrod; //css trang thai
+    }
+
     &__thumbnail {
         & > img {
             border-radius: 0.5rem;
             width: 190px;
+        }
+
+        &--active {
+            color: goldenrod;
         }
     }
 
