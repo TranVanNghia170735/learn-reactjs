@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CodeIcon from '@material-ui/icons/Code';
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  link: {
+      color: '#fff',
+      textDecoration: 'none',
+  }
+
 }));
 
 export default function Header() {
@@ -28,12 +34,19 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar>
           <CodeIcon className={classes.menuButton}/>
-          <Typography variant="h6" className={classes.title}>
-            F88 Shop
+          <Typography variant="h6" className={classes.title}>        
+            <Link className={classes.link} to ="/">F88 Shop</Link>
           </Typography>
+
+          <NavLink className={classes.link} to ="/todos">
                 <Button color="inherit">Todos</Button>
+          </NavLink>
+
+          <NavLink className={classes.link} to ="/albums">
                 <Button color="inherit">Albums</Button>
-                <Button color="inherit">Register</Button>
+          </NavLink>
+
+          <Button color="inherit">Register</Button>
           </Toolbar>
       </AppBar>
     </div>

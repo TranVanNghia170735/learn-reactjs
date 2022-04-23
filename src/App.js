@@ -26,21 +26,21 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <p><Link to="/todos">Todos</Link></p>
-      <p><Link to="/albums">Albums</Link></p>
+      <p><Link to="/todos">Todo</Link></p>
+      <p><Link to="/albums">Album</Link></p>
 
-      {/* <p><NavLink to="/todos" activeClassName='active-menu'>Todos</NavLink></p> */}
-      {/* <p><NavLink to="/albums">Albums</NavLink></p> */}
+       {/* <p><NavLink to="/todos" activeClassName='active-menu'>Todos</NavLink></p> 
+       <p><NavLink to="/albums">Albums</NavLink></p>  */}
 
       Home Page
       <Switch>
         <Redirect from='/home' to='/' exact />
         <Redirect from='/post-list/:postId' to='/posts/:postId' exact />
-        {/* <Route path="/" component={TodoFeature} exact /> */}
-        <Route path="/" component={CounterFeature} />
-        <Route path="/todos-list" component={TodoFeature} />
+         <Route path="/" component={TodoFeature} exact /> 
+        {/* <Route path="/" component={CounterFeature} /> */}
+        <Route path="/todos" component={TodoFeature} />
         <Route path="/albums" component={AlbumFeatures} />
-        {/* <Route component={NotFound} /> */}
+         <Route component={NotFound} />
       </Switch>
 
     </div>
