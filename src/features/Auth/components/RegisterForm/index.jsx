@@ -4,8 +4,31 @@ import InputField from '../../../../components/form-controls/InputField';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { Avatar, Typography } from '@material-ui/core';
+import { Avatar, Button, Typography } from '@material-ui/core';
 import { LockOutlined } from '@mui/icons-material';
+import { makeStyles } from '@material-ui/core/styles';
+
+
+const useStyles = makeStyles((theme) =>({
+    root: {
+        paddingTop:theme.spacing(2),
+    },
+
+    avatar: {
+        margin: '0 auto',
+        backgroundColor: theme.palette.secondary.main
+    },
+
+    title: {
+        margin: theme.spacing(2, 0, 3, 0),
+        textAlign: 'center',
+    },
+
+    submit: {
+        margin: theme.spacing(3, 0, 2, 0),
+    },
+
+}));
 
 RegisterForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -13,6 +36,7 @@ RegisterForm.propTypes = {
 };
 
 function RegisterForm(props) {
+    const classes = useStyles();
     const schema = yup.object().shape({
         title: yup.string().required('Please enter title').min(5, 'Title is too short'),
       });
@@ -36,12 +60,13 @@ function RegisterForm(props) {
     }
 
     return (
-        <div>
-            <Avatar>
+        
+        <div className={classes.root}>
+            <Avatar className={classes.avatar}>
                 <LockOutlined></LockOutlined>
             </Avatar>
 
-            <Typography component="h3" variant="h5">
+            <Typography className={classes.title} component="h3" variant="h5">
                 Create An Account
             </Typography>
 
@@ -50,11 +75,12 @@ function RegisterForm(props) {
                 <InputField name="email" label="Email" form={form} />
                 <InputField name="password" label="Password" form={form} />
                 <InputField name="retypePassword" label="Retype Password" form={form} />
+                
+                <Button className={classes.submit} variant="contained" color="primary" fullWidth>
+                    Create an account
+                </Button>
             </form>
-        </div>
-
-
-        
+        </div>   
     );
 }
 
