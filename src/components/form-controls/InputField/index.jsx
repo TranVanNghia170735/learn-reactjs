@@ -35,8 +35,7 @@ function InputField(props) {
           onBlur={onBlur}
         />
       )}
-    />
-       
+      />    
     );
 }
 
