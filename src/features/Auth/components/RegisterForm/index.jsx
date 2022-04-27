@@ -38,7 +38,13 @@ RegisterForm.propTypes = {
 
 function RegisterForm(props) {
     const classes = useStyles();
-    const schema = yup.object().shape({});
+    const schema = yup.object().shape({
+        fullName: yup.string().required('Please enter your full name')
+          .test('should has at least two words', 'Please enter at least two words', (value) => {
+            console.log('Value', value);
+            return value.split(' ').length >= 2;
+        })
+    });
 
     const form = useForm({
         defaultValues: {
