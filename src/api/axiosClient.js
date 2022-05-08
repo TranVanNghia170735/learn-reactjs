@@ -7,7 +7,7 @@ const axiosClient = axios.create({
     },
 });
 
-
+//Lam cho tat ca request hoac cho tat ca response.
 // Add a request interceptor
 axiosClient.interceptors.request.use(function (config) {
     // Do something before request is sent
