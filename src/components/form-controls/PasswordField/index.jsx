@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Controller } from 'react-hook-form';
+import { FormHelperText } from '@material-ui/core';
 
 PasswordField.propTypes = {
     form: PropTypes.object.isRequired,
@@ -18,8 +19,8 @@ PasswordField.propTypes = {
 
 function PasswordField(props) {
     const {form, name, label, disabled} = props;
-    const{ errors, formState} = form;
-    const hasError = formState.touched[name] && errors[name];
+    const{ errors} = form;
+    const hasError = errors[name];
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -70,9 +71,9 @@ function PasswordField(props) {
           }
           disabled={disabled}
           error={!!hasError}
-          helperText={errors[name]?.message}
         />
       </FormControl>
+      <FormHelperText error={!!hasError}>{errors[name]?.message}</FormHelperText>
       </div>
        
     );
