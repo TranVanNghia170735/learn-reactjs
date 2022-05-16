@@ -1,4 +1,7 @@
+import { register } from 'features/Auth/userSlice';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { unwrapResult } from '@reduxjs/toolkit';
 import RegisterForm from '../RegisterForm';
 
 Register.propTypes = {
@@ -6,8 +9,18 @@ Register.propTypes = {
 };
 
 function Register(props) {
-    const handleSubmit = (value) => {
-        console.log('Form submit:', value);
+    const dispatch = useDispatch();
+    const handleSubmit = async(values) => {  
+        try {
+            //auto set username = email
+            values.username = values.email;
+            const action = register(values);
+            const resultAction = await dispatch(action);
+            const user = unwrapResult(resultAction);
+            console.log('New user', user);
+        } catch (error) {
+            console.log('Failed to register:', error);
+        }
     }
 
     return (
