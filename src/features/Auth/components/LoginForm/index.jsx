@@ -39,25 +39,37 @@ const useStyles = makeStyles((theme) =>({
 
 }));
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
     onSubmit: PropTypes.func,
 
 };
 
-function LoginForm(props) {
+function RegisterForm(props) {
     const classes = useStyles();
     const schema = yup.object().shape({
-        
-        identifier: yup.string()
+        fullName: yup.string()
+            .required('Please enter your full name')
+            .test('should has at least two words', 'Please enter at least two words', (value) => {
+             console.log('Value', value);
+             return value.split(' ').length >= 2;
+        }),
+        email: yup.string()
             .required('Please enter your email.')
             .email('Please enter a valid email address.'),
         password: yup.string()
-            .required('Please enter your password ')         
+            .required('Please enter your password ')
+            .min(6, 'Please enter at least 6 character.'),
+        retypePassword: yup.string()
+            .required('Please retype your password.')
+            .oneOf([yup.ref('password')],'Password does not match')       
     });
+
     const form = useForm({
-        defaultValues: {       
-            identifier:'',
+        defaultValues: {
+            fullName: '',
+            email:'',
             password:'',
+            retypePassword:''
         },
         resolver: yupResolver(schema),
     });
@@ -82,13 +94,15 @@ function LoginForm(props) {
             </Avatar>
 
             <Typography className={classes.title} component="h3" variant="h5">
-                Sign In
+                Create An Account
             </Typography>
 
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <InputField name="identifier" label="Email" form={form} />
+                <InputField name="fullName" label="FullName" form={form} />
+                <InputField name="email" label="Email" form={form} />
                 <PasswordField name="password" label="Password" form={form} />
-
+                <PasswordField name="retypePassword" label="Retype Password" form={form} />
+                
                 <Button 
                     disabled={isSubmitting} 
                     type="submit" 
@@ -105,4 +119,4 @@ function LoginForm(props) {
     );
 }
 
-export default LoginForm;
+export default RegisterForm;

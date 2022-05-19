@@ -14,6 +14,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Register from '../../features/Auth/components/Register';
 import { IconButton } from '@mui/material';
 import { Close } from '@material-ui/icons';
+import Login from 'features/Auth/components/Login';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -88,7 +89,8 @@ export default function Header() {
     
         <DialogContent>
           <DialogContentText>
-           <Register closeDialog={handleClose}/>
+           {/* <Register closeDialog={handleClose}/> */}
+           <Login closeDialog={handleClose}/>
           </DialogContentText>
         </DialogContent> 
       </Dialog>
