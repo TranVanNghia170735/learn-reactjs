@@ -8,9 +8,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {  Close} from '@material-ui/icons';
 import CodeIcon from '@material-ui/icons/Code';
+import { AccountCircle } from '@mui/icons-material';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +46,8 @@ const MODE = {
 };
 
 export default function Header() {
-  
+    const loggedInUser = useSelector(state => state.user.current);
+    const isLoggedIn   = !!loggedInUser.id; // convert a value to a boolean.
     const [open, setOpen] = useState(false);
     const [mode, setMode] = useState(MODE.LOGIN);
 
@@ -74,8 +77,17 @@ export default function Header() {
           <NavLink className={classes.link} to ="/albums">
                 <Button color="inherit">Albums</Button>
           </NavLink>
+          {!isLoggedIn && (
+              <Button color ="inherit" onClick={handleClickOpen}>
+                  Login
+              </Button>
+          )}
+          {isLoggedIn && (
+              <IconButton color ="inherit">
+                 <AccountCircle/>
+              </IconButton>
+          )}
 
-          <Button color="inherit" onClick={handleClickOpen}>Register</Button>
           </Toolbar>
       </AppBar>
 
