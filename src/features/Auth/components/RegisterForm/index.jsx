@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PasswordField from '../../../../components/form-controls/PasswordField';
 
 
+
 const useStyles = makeStyles((theme) =>({
     root: {
         position:'relative',
@@ -39,12 +40,12 @@ const useStyles = makeStyles((theme) =>({
 
 }));
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
     onSubmit: PropTypes.func,
 
 };
 
-function LoginForm(props) {
+function RegisterForm(props) {
     const classes = useStyles();
     const schema = yup.object().shape({
         
@@ -105,4 +106,4 @@ function LoginForm(props) {
     );
 }
 
-export default LoginForm;
+export default RegisterForm;

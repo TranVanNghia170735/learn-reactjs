@@ -39,12 +39,12 @@ const useStyles = makeStyles((theme) =>({
 
 }));
 
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
     onSubmit: PropTypes.func,
 
 };
 
-function RegisterForm(props) {
+function LoginForm(props) {
     const classes = useStyles();
     const schema = yup.object().shape({
         fullName: yup.string()
@@ -119,4 +119,4 @@ function RegisterForm(props) {
     );
 }
 
-export default RegisterForm;
+export default LoginForm;

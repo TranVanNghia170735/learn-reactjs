@@ -1,10 +1,10 @@
 import { unwrapResult } from '@reduxjs/toolkit';
-import { login, register } from 'features/Auth/userSlice';
+import { login } from 'features/Auth/userSlice';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import LoginForm from '../RegisterForm';
+import LoginForm from '../LoginForm';
 
 Login.propTypes = {
     closeDialog: PropTypes.func,
@@ -24,6 +24,7 @@ function Login(props) {
             if(closeDialog) {
                 closeDialog();
             }
+            
         } catch (error) {
             console.log('Failed to login:', error);
             enqueueSnackbar(error.message, {variant: 'error'});
