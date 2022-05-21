@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import userAPi from 'api/userApi';
 import StorageKeys from 'constants/storage-keys';
 
-export const register = createAsyncThunk(
+const register = createAsyncThunk(
     'user/register',
     async (payload) => {
       // Call Api to register.
