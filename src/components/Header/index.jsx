@@ -6,13 +6,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import {  Close} from '@material-ui/icons';
+import { AccountCircle, Close } from '@material-ui/icons';
 import CodeIcon from '@material-ui/icons/Code';
-import { AccountCircle } from '@mui/icons-material';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
+import { logout } from 'features/Auth/userSlice';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,18 +26,17 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   link: {
-      color: '#fff',
-      textDecoration: 'none',
+    color: '#fff',
+    textDecoration: 'none',
   },
+
   closeButton: {
-    position : 'absolute',
+    position: 'absolute',
     top: theme.spacing(1),
     right: theme.spacing(1),
     color: theme.palette.grey[500],
-    zIndex:1
-
-  }
-
+    zIndex: 1,
+  },
 }));
 
 const MODE = {
@@ -46,62 +45,74 @@ const MODE = {
 };
 
 export default function Header() {
-    const loggedInUser = useSelector(state => state.user.current);
-    const isLoggedIn   = !!loggedInUser.id; // convert a value to a boolean.
-    const [open, setOpen] = useState(false);
-    const [mode, setMode] = useState(MODE.LOGIN);
-    const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector((state) => state.user.current);
+  const isLoggedIn = !!loggedInUser.id;
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState(MODE.LOGIN);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-    const handleClose = () => {
-      setOpen(false);
-    };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleUserClick = (e) =>{
-      setAnchorEl(e.currentTarget);
-    }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    const handleCloseMenu = () => {
-      setAnchorEl(null);
-    }
+  const handleUserClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
 
-    const classes = useStyles();
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogoutClick = () => {
+    const action = logout();
+    dispatch(action);
+  };
+
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <CodeIcon className={classes.menuButton}/>
-          <Typography variant="h6" className={classes.title}>        
-            <Link className={classes.link} to ="/">F88 Shop</Link>
+          <CodeIcon className={classes.menuButton} />
+
+          <Typography variant="h6" className={classes.title}>
+            <Link className={classes.link} to="/">
+              EZ SHOP
+            </Link>
           </Typography>
 
-          <NavLink className={classes.link} to ="/todos">
-                <Button color="inherit">Todos</Button>
+          <NavLink className={classes.link} to="/todos">
+            <Button color="inherit">Todos</Button>
           </NavLink>
 
-          <NavLink className={classes.link} to ="/albums">
-                <Button color="inherit">Albums</Button>
+          <NavLink className={classes.link} to="/albums">
+            <Button color="inherit">Albums</Button>
           </NavLink>
+
           {!isLoggedIn && (
-              <Button color ="inherit" onClick={handleClickOpen}>
-                  Login
-              </Button>
-          )}
-          {isLoggedIn && (
-              <IconButton color ="inherit" onClick={handleUserClick}>
-                 <AccountCircle/>
-              </IconButton>
+            <Button color="inherit" onClick={handleClickOpen}>
+              Login
+            </Button>
           )}
 
-          </Toolbar>
+          {isLoggedIn && (
+            <IconButton color="inherit" onClick={handleUserClick}>
+              <AccountCircle />
+            </IconButton>
+          )}
+        </Toolbar>
       </AppBar>
+
       <Menu
-        anchorEl={anchorEl}
         keepMounted
+        anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleCloseMenu}
         anchorOrigin={{
@@ -112,10 +123,10 @@ export default function Header() {
           vertical: 'top',
           horizontal: 'right',
         }}
-        getContentAnchorEl = {null}
+        getContentAnchorEl={null}
       >
         <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
-        <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
+        <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
       </Menu>
 
       <Dialog
