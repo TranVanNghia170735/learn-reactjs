@@ -27,8 +27,8 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <p><Link to="/todos">Todo</Link></p>
-      <p><Link to="/albums">Album</Link></p>
+      {/* <p><Link to="/todos">Todo</Link></p>
+      <p><Link to="/albums">Album</Link></p> */}
 
        {/* <p><NavLink to="/todos" activeClassName='active-menu'>Todos</NavLink></p> 
        <p><NavLink to="/albums">Albums</NavLink></p>  */}
@@ -37,10 +37,10 @@ function App() {
       <Switch>
         <Redirect from='/home' to='/' exact />
         <Redirect from='/post-list/:postId' to='/posts/:postId' exact />
-        <Route path="/" component={TodoFeature} exact />
-        <Route path="/todos" component={TodoFeature} />
-        <Route path="/albums" component={AlbumFeatures} />
-        <Route path="/products" component={ProductFeature} />
+        {/* <Route path="/" component={TodoFeature} exact /> */}
+        <Route path="/todos" component={TodoFeature} /> 
+        <Route path="/albums" component={AlbumFeatures}/>
+        <Route path="/products" component={ProductFeature}/>
         <Route component={NotFound} />
       </Switch>
 
