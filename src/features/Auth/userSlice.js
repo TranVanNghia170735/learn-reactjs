@@ -1,3 +1,4 @@
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import userApi from 'api/userApi';
 import StorageKeys from 'constants/storage-keys';
@@ -48,6 +49,8 @@ const userSlice = createSlice({
   },
 });
 
+
 const { actions, reducer } = userSlice;
 export const { logout } = actions;
 export default reducer;
+
