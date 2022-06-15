@@ -5,6 +5,7 @@ import productApi from 'api/productApi';
 import { useState } from 'react';
 import { Typography } from '@material-ui/core';
 import ProductSkeletonList from '../components/ProductSkeletonList';
+import ProductList from '../components/ProductList';
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -14,25 +15,24 @@ const useStyles = makeStyles(theme => ({
     },
 
     right: {
-        flex: '1 1 auto'
+        flex: '1 1 0'
     }
 }))
 
 function ListPage(props) {
     const classes = useStyles();
-    const [productLis, setProductList] = useState([]);
+    const [productList, setProductList] = useState([]);
     const [loading, setLoading] = useState(true);
     
     useEffect(() => {
         (async () => {
             try {
                 const {data} = await productApi.getAll({_page: 1, _limit: 10});
-                setProductList(data);
+                setProductList(data); 
             } catch (error) {
                 console.log("Failed o fetch product list: ", error);
             }
-
-            //setLoading(false);
+        setLoading(false);
         })();
     }, []);
 
@@ -47,7 +47,7 @@ function ListPage(props) {
 
                     <Grid item className={classes.right}>  
                         <Paper elevation={0}> 
-                            {loading ? <ProductSkeletonList/> : <Typography>ProductList</Typography>}
+                            {loading ? <ProductSkeletonList/> : <ProductList data={productList}/>}
                         </Paper>
                     </Grid>
                 </Grid>
