@@ -3,7 +3,6 @@ import { Box, Container, Grid, Pagination, Paper} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import productApi from 'api/productApi';
 import { useState } from 'react';
-import { Typography } from '@material-ui/core';
 import ProductSkeletonList from '../components/ProductSkeletonList';
 import ProductList from '../components/ProductList';
 import ProductSort from '../components/ProductSort';
