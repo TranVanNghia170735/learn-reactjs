@@ -10,7 +10,6 @@ import ProductFilters from '../components/ProductFilters';
 import FilterViewer from '../components/FilterViewer';
 import { useHistory, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
-import { NewspaperSharp } from '@mui/icons-material';
 
 const useStyles = makeStyles(theme => ({
     root: {},
