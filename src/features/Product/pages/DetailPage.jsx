@@ -1,5 +1,6 @@
 import { Box, Container, Grid, LinearProgress, makeStyles, Paper } from '@material-ui/core';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useRouteMatch, Route, Switch, Router} from 'react-router-dom';
 import AddToCartForm from '../components/AddToCartForm';
 import ProductAdditional from '../components/ProductAdditional';
@@ -9,6 +10,7 @@ import ProductMenu from '../components/ProductMenu';
 import ProductReviews from '../components/ProductReviews';
 import ProductThumbnail from '../components/ProductThumbnail';
 import useProductDetail from '../hook/useProductDetail';
+import { addToCart } from 'features/Cart/cartSlice'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +42,7 @@ function DetailPage() {
   } = useRouteMatch();
   const {url, path} = useRouteMatch();
   const { product, loading } = useProductDetail(productId);
+  const dispatch = useDispatch();
 
   if (loading) {
     // TODO: Make this beautiful
@@ -48,8 +51,13 @@ function DetailPage() {
     </Box>;
   }
 
-  const handleAddToCartSubmit = (formValues) => {
-    console.log('Form submit', formValues);
+  const handleAddToCartSubmit = ({quantity}) => {
+        const action = addToCart({
+            id: product.id,
+            product,
+            quantity
+        });
+        dispatch(action);
   };
 
   return (
