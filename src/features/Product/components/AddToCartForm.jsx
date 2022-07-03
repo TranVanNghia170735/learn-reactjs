@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import InputField from 'components/form-controls/InputField';
 import { Button } from '@material-ui/core';
+import QuantityField from 'components/form-controls/QuantityField';
 
 AddToCartForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -12,7 +12,10 @@ AddToCartForm.propTypes = {
 
 function AddToCartForm({onSubmit = null}) {
     const schema = yup.object().shape({
-        quantity: yup.number().min(1, 'Please enter at least 1').required('Please enter quantity')
+        quantity: yup.number()
+                    .required('Vui lòng nhập vào số lượng')
+                    .min(1, 'Giá trị nhỏ nhất là 1')
+                    .typeError('Làm ơn nhập vào kí tự số')
     });
     
     const form = useForm({
@@ -30,8 +33,10 @@ function AddToCartForm({onSubmit = null}) {
 
     return (
         <form onSubmit={form.handleSubmit(handleSubmit)}>
-            <InputField name="quantity" label="Quantity" form={form}/>
-            <Button type="submit" variant="contained" color="primary" fullWith size="large">Buy</Button>
+            <QuantityField  name="quantity" label="Quantity" form={form}/>
+            <Button type="submit" variant="contained" color="primary" style={{width: '250px'}} size="large">
+                Add to cart
+            </Button>
         </form>
     );
 }
