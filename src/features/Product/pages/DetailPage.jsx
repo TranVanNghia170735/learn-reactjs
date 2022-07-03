@@ -70,7 +70,7 @@ function DetailPage() {
           <Route path={`${url}/reviews`} component={ProductReviews} /> */}
 
           <Route exact path={url}>
-                <ProductDescription/>
+                <ProductDescription product={product}/>
           </Route>
 
           <Route path={`${url}/additional`}>

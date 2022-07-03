@@ -1,14 +1,20 @@
+import { Paper } from '@mui/material';
 import React from 'react';
+import PropTypes from 'prop-types';
+import DOMPurify from 'dompurify';
 
 ProductDescription.propTypes = {
-    
+    product: PropTypes.object
 };
 
-function ProductDescription(props) {
+function ProductDescription({product = {} }) {
+    
+    const safeDescription = DOMPurify.sanitize(product.description)
+
     return (
-        <div>
-            Description
-        </div>
+        <Paper elevation={0} style={{padding: '15px'}}>
+             <div dangerouslySetInnerHTML={{__html: safeDescription }}></div>
+        </Paper>
     );
 }
 
