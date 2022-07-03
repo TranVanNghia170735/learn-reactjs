@@ -1,4 +1,4 @@
-import { Box, Link, makeStyles } from '@material-ui/core';
+import { Box, makeStyles, Link } from '@material-ui/core';
 import React from 'react';
 import { NavLink, useRouteMatch } from 'react-router-dom';
 
@@ -31,8 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ProductMenu(props) {
   const classes = useStyles();
-  const { url } = useRouteMatch();
-
+  const {url} = useRouteMatch();
   return (
     <Box component="ul" className={classes.root}>
       <li>
